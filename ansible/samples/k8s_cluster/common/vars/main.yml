@@ -1,0 +1,19 @@
+base_packages:
+- curl
+- apt-transport-https
+- ca-certificates
+- python-apt
+- python3-apt
+- aptitude
+- gpg
+
+k8s_packages:
+- kubeadm
+- kubectl
+- kubelet
+- containerd
+- runc
+
+google_cloud_public_sign_key_url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+google_cloud_public_sign_key_path: /usr/share/keyrings/kubernetes-archive-keyring.gpg
+kubernetes_repo: deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main

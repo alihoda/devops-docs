@@ -1,0 +1,15 @@
+groups:
+- name: cpu_core_count
+  rules:
+  - record: node:cpu_count:count
+    expr: count by (instance) (sum by (instance, cpu) (node_cpu_seconds_total))
+- name: cpu_usage
+  rules:
+  - alert: NodeCpuUsage
+    expr: sum by (instance) (node_load1) > node:cpu_count:count
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: "High CPU usage on {{ $labels.instance }}"
+      description: "{{ $labels.instance }} has {{ $value }} Load1 average for 5min"

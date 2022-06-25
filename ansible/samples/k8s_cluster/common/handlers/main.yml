@@ -1,0 +1,14 @@
+
+- name: Restart containerd
+  ansible.builtin.systemd:
+    name: containerd
+    state: restarted
+
+- name: Modprobe overlay
+  ansible.builtin.command: modprobe overlay
+
+- name: Modprobe br_netfilter
+  ansible.builtin.command: modprobe br_netfilter
+
+- name: Apply sysctl params
+  ansible.builtin.command: sysctl --system

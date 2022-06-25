@@ -1,0 +1,15 @@
+---
+# tasks file for master
+
+- name: Allow Master Node ports
+  ansible.builtin.iptables:
+    chain: INPUT
+    jump: ACCEPT
+    protocol: tcp
+    destination_ports:
+      - "6443"
+      - "2379"
+      - "2380"
+      - "10250"
+      - "10257"
+      - "10259"

@@ -1,0 +1,12 @@
+---
+# tasks file for worker
+
+- name: Allow Worker Node ports
+  ansible.builtin.iptables:
+    chain: INPUT
+    jump: ACCEPT
+    protocol: tcp
+    destination_ports:
+      - "10250"
+      - "30000:32768"
+      

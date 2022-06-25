@@ -1,0 +1,26 @@
+---
+# This playbook configure all hosts.
+
+- name: Apply common config to all hosts
+  hosts: all
+  become: true
+  remote_user: debian
+  roles:
+    - common
+
+
+- name: Apply master config to master hosts
+  hosts: master
+  become: true
+  remote_user: debian
+  roles:
+    - master
+
+
+- name: Apply worker config to worker hosts
+  hosts: worker
+  become: true
+  remote_user: debian
+  roles:
+    - worker
+    
