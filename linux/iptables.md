@@ -1,0 +1,22 @@
+# iptables
+
+## NetFilter Hooks
+
+|Hook|Chain|
+|---|---|
+|NF_IP_PRE_ROUTING|PREROUTING|
+|NF_IP_LOCAL_IN|INPUT|
+|NF_IP_FORWARD|FORWARD|
+|NF_IP_LOCAL_OUT|OUTPUT|
+|NF_IP_POST_ROUTING|POSTROUTING|
+
+## iptables Tables
+
+|Table|Chains|
+|---|---|
+|filter|INPUT, OUTPUT, FORWARD|
+|nat (DNAT)|PREROUTING, OUTPUT|
+|nat (SNAT)|INPUT, POSTROUTING|
+|mangle|PREROUTING, OUTPUT|
+|raw|PREROUTING, OUTPUT|
+|security|INPUT, FORWARD, OUTPUT|
