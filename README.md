@@ -4,11 +4,11 @@ Documents and sample codes for:
 
 - *Linux*
 - Container orchestration:
-    - *Docker*
-    - *Kubernetes*
-- Configuration Managment:
-    - *Ansible*
+  - *Docker*
+  - *Kubernetes*
+- Configuration Management:
+  - *Ansible*
 - Monitoring and Logging:
-    - *Prometheus*
+  - *Prometheus*
 - Database:
-    - Replication. *Mariadb*, *MongoDB*, and *Redis*
+  - Replication. *Mariadb*, *MongoDB*, and *Redis*

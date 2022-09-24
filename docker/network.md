@@ -43,7 +43,7 @@
 #### Cons
 
 - There is no DHCP, so IPs should be defined manually (IP conflict);
-- The MAC address is on *promiscuous* mode which there is no control over it. 
+- The MAC address is on *promiscuous* mode which there is no control over it.
 
 ### 5. IPVlan (L2)
 
