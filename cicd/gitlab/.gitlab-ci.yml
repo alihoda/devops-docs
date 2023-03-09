@@ -1,0 +1,64 @@
+image: golang:1.19-alpine
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH != "main" && $CI_PIPELINE_SOURCE != "merge_request_event"
+      when: never
+    - when: always
+
+include:
+  - local: ci-templates/deploy-k8s.yml
+
+variables:
+  APP_NAME: "devops-sample"
+  APP_VERSION: "1.0"
+  IMAGE_NAME: "devops-sample"
+  REPLICAS: 1
+  SERVICE_PORT: 8080
+
+stages:
+  - test
+  - build
+  - deploy
+
+check-format:
+  stage: test
+  script:
+    - echo check-format
+
+test-app:
+  stage: test
+  script:
+    - go test
+
+build-image:
+  stage: build
+  tags:
+    - remote
+    - shell
+  before_script:
+    - go build main.go
+    - export IMAGE_NAME=$IMAGE_NAME
+    - export IMAGE_TAG=$APP_VERSION
+  script:
+    - docker build -t $IMAGE_NAME:$IMAGE_TAG .
+
+push-image:
+  stage: build
+  tags:
+    - remote
+    - shell
+  needs:
+    - build-image
+  before_script:
+    - export IMAGE_NAME=$IMAGE_NAME
+    - export IMAGE_TAG=$APP_VERSION
+    - docker login -u $CI_REGISTRY_USERNAME -p $CI_REGISTRY_PASSWORD $CI_REGISTRY_IMAGE
+  script:
+    - docker push $IMAGE_NAME:$IMAGE_TAG
+
+deploy:
+  stage: deploy
+  tags:
+    - remote
+    - shell
